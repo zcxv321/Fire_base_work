@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.7.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.7.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.7.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.7.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.7.1/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+    
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+      #ex-table {
+	    	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	    	border-collapse: collapse;
+	    	width: 80%;
+        margin-top: 5%;
+		}
+
+		#ex-table td, #ex-table th {
+	    	border: 1px solid #ddd;
+	    	padding: 8px;
+		}
+
+		#ex-table tr:nth-child(even){background-color: #f2f2f2;}
+
+		#ex-table tr:hover {background-color: #ddd;}
+
+		#ex-table th {
+	    	padding-top: 15px;
+	    	padding-bottom: 12px;
+	    	text-align:center;
+	    	background-color: rgb(46, 148, 245);
+	    	color: white;
+		}
+		#ex-table td {
+	    	text-align:justify;
+		}
+
+
+    </style>
+  </head>
+  <body>
+    
+
+      <center>
+          <div style="overflow-x:auto;">
+      <table style="width:50%" id="ex-table">
+          <tr id="tr">
+            <th>Name</th>
+            <th>Age</th> 
+            <th>Date</th>
+            <th>firstTest</th>
+            <th>name</th>
+            <th>resultText</th>
+            <th>Score0</th>
+            <th>Score1</th>
+            <th>Score2</th>
+            <th>Score3</th>            
+        </table> 
+        </div>
+      </center>
+
+    <!--  -->
+   
+
+    <!--  -->
+    <script>
+
+        var config = {
+    apiKey: "AIzaSyBEpBGEoENQPJbwv7RmNNHYILpg8PCfpSM",
+    authDomain: "colorblindapp01-befb2.firebaseapp.com",
+    databaseURL: "https://colorblindapp01-befb2.firebaseio.com",
+    projectId: "colorblindapp01-befb2",
+    storageBucket: "colorblindapp01-befb2.appspot.com",
+    messagingSenderId: "887415705341"
+  };
+        firebase.initializeApp(config);
+        const db = firebase.database().ref().child('ResultRecord');
+        db.on('value',snap => console.log(snap.val()));
+//        db.on('value', snap => bigone.innerText = snap.val());
+        var database = firebase.database();
+        database.ref('ResultRecord').once('value', function(snapshot){
+        if(snapshot.exists()){
+            var content = '';
+            snapshot.forEach(function(data){
+                var val = data.val();
+                content +='<tr>';
+                content += '<td>' + val.name + '</td>';
+                content += '<td>' + val.age + '</td>';
+                content += '<td>' + val.date+ '</td>';
+                content += '<td>' + val.firstTest+ '</td>';
+                content += '<td>' + val.name+ '</td>';
+                content += '<td>' + val.resultText+ '</td>';
+                content += '<td>' + val.score0+ '</td>';
+                content += '<td>' + val.score1+ '</td>';
+                content += '<td>' + val.score2+ '</td>';
+                content += '<td>' + val.score3+ '</td>';
+                content += '</tr>';
+            });
+            $('#ex-table').append(content);
+        }
+    });
+      </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>
